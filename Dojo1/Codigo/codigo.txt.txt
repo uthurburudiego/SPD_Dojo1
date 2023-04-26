@@ -1,0 +1,84 @@
+/*Dojo 1 
+
+1- El semáforo tiene que tener 2 leds de cada color como mínimo, en caso de que uno se  rompa. 
+2- Tiene que implementar los tiempos correctos como se detallan a continuación. 3- El verde dura 5 segundos. 
+4- El amarillo dura 3 segundos. 
+5- Rojo dura 5 segundos. 
+6- Tiene que tener señalización para personas no videntes como se detalla a  continuación. (Buzzer o piezo)
+7- Durante el rojo: Tiene que sonar 2 vez por segundo en un tono FUERTE. 
+
+
+*/
+#define LED_RED 2
+#define LED_GREEN 4
+#define LED_YELLOW 3
+#define LED_RED_TWO 5
+#define LED_GREEN_TWO 7
+#define LED_YELLOW_TWO 6
+#define SONIDO 8
+
+
+
+void setup()
+{
+  pinMode(LED_RED, OUTPUT);
+  pinMode(LED_GREEN, OUTPUT);
+  pinMode(LED_YELLOW, OUTPUT);
+  pinMode(LED_RED_TWO, OUTPUT);
+  pinMode(LED_GREEN_TWO, OUTPUT);
+  pinMode(LED_YELLOW_TWO, OUTPUT);
+  pinMode(SONIDO, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+	prender(LED_GREEN, LED_GREEN_TWO, 5000);
+  	Serial.println("Se prendio la luz verde");
+    apagar();
+  	Serial.println("Se apago la luz verde");
+  	
+  	prender(LED_YELLOW, LED_YELLOW_TWO, 3000);
+  	Serial.println("Se prendio la luz amarilla");
+  	apagar();
+  	Serial.println("Se apago la luz amarilla");
+    prender(LED_RED, LED_RED_TWO, 0);
+  	Serial.println("Se prendio la luz roja");
+  	if(digitalRead(LED_RED)== 1)
+    {  
+      	Serial.println("entro al if");
+     	sonar(250,10);
+  	}
+  	apagar();
+}
+
+void prender(int ledUno, int ledDos, int tiempo)
+{
+	digitalWrite(ledUno, HIGH);
+  	digitalWrite(ledDos, HIGH);
+  	delay(tiempo); 
+}
+void apagar()
+{
+	digitalWrite(LED_RED, LOW);
+  	digitalWrite(LED_RED_TWO, LOW);
+  	digitalWrite(LED_GREEN, LOW);
+  	digitalWrite(LED_GREEN_TWO, LOW);
+  	digitalWrite(LED_YELLOW, LOW);
+  	digitalWrite(LED_YELLOW_TWO, LOW);
+}
+void sonar(int tiempo, int repeticiones)
+{
+
+	for(int i=0; i<repeticiones; i++)
+    {
+    	tone(SONIDO,880);
+        Serial.println("Sonido encendido");
+      	delay(tiempo);
+      	noTone(SONIDO);
+        Serial.println("Sonido apagado");
+      	delay(tiempo);
+    }
+
+}
+
