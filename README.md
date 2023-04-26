@@ -18,7 +18,7 @@
 Este semáforo se encarga de: 
 - Encender la luz verde dura 5 segundos. 
 - Encender la luz amarilla dura 3 segundos. 
-- Encender la luz durante 5 segundos. 
+- Encender la luz roja durante 5 segundos. 
 - Tambien cuenta con señalización para personas no videntes como se detalla a  continuación. (Buzzer o piezo)
 - Durante el rojo: Tiene que sonar 2 veces por segundo en un tono FUERTE. 
 
